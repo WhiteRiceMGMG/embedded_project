@@ -8,9 +8,9 @@
 #include <trykernel.h>
 #include <knldef.h>
 
-void initsk(INT stacd, void *exinf);                /* 初期タスクの実行プログラム  */
+void initsk(INT stacd, void *exinf);                /* 初期タスクの実行プログラム   */
 UW  tskstk_ini[256/sizeof(UW)];                     /* 初期タスクのスタック        */
-ID  tskid_ini;                                      /* 初期タスクのID番号         */    
+ID  tskid_ini;                                      /* 初期タスクのID番号          */    
 
 T_CTSK  ctsk_ini = {
     .tskatr     = TA_HLNG | TA_RNG0 | TA_USERBUF,   /* タスク属性                 */
@@ -22,7 +22,7 @@ T_CTSK  ctsk_ini = {
 
 void initsk(INT stacd, void *exinf)
 {
-    tm_com_init();                                  /* シリアル通信の初期化       */
+    tm_com_init();                                  /* シリアル通信の初期化        */
     tm_putstring("Strat Try Kernel\n");
 
     usermain();
