@@ -1,3 +1,5 @@
+汎用目的embedded_projectフォルダ構成
+
 emb_prj_v1.0
 ├── application 
 │   ├── init_tsk.c
