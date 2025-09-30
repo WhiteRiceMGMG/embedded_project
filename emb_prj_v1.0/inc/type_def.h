@@ -37,19 +37,4 @@ typedef unsigned int        UINT;   /* 符号無し整数 */
 
 /* 特別な意味を持つ整数 */
 typedef INT                 ID;     /* ID番号 */
-typedef UW                  ATR;    /* 属性 */
-typedef INT                 ER;     /* エラーコード */
-typedef INT                 PRI;    /* 優先順位 */
-typedef W                   TMO;    /* タイムアウト時間 */
-typedef UW                  RELTIM; /* 相対時間 */
-typedef W                   SZ;     /* サイズ */
-
-typedef void                (*FP)();    /* 関数ポインタ */
-
-#define NULL                (0)
-
-typedef UINT                BOOL;
-#define TRUE                (1)     /* True */
-#define FALSE               (0)     /* False */
-
-#endif  /* TYPEDEF_H */
+typedef UW                  ATR;    /* 属性 */ /* 
