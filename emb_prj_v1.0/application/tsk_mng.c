@@ -1,13 +1,23 @@
-/* 
- *** Try Kernel
- *      タスク管理
-*/
+/*********************************************************************************/
+/* Copyright OGAWA CONST                                                         */
+/*********************************************************************************/
+/* file : scheduler.c                                                            */
+/* abst : task scheduler                                                         */
+/* hist : 2025 / 10 /01                                                          */
+/*********************************************************************************/
 #include <trykernel.h>
 #include <knldef.h>
 
-TCB	tcb_tbl[CNF_MAX_TSKID];         /* タスク管理ブロック (TCB) */
+TCB	tcb_tbl[CNF_MAX_TSKID];                            /* タスク管理ブロック (TCB) */
 
-/* タスク生成API */
+
+/*********************************************************************************/
+/* 関数   | ID tk_cre_tsk( const T_CTSK *pk_ctsk )                               */
+/* 説明   | タスク生成API                                                          */
+/* 引数   | const T_CTSK *pk_ctsk                                                 */
+/* 戻り値 | ID                                                                    */
+/* 作成   | 2025 / 10 /01                                                         */
+/*********************************************************************************/
 ID tk_cre_tsk( const T_CTSK *pk_ctsk )
 {
     UINT    intsts;
@@ -19,9 +29,9 @@ ID tk_cre_tsk( const T_CTSK *pk_ctsk )
     if(pk_ctsk->itskpri <= 0 || pk_ctsk->itskpri > CNF_MAX_TSKPRI) return E_PAR;
     if(pk_ctsk->stksz == 0) return E_PAR;
 
-    DI(intsts);     // 割込み禁止
+    DI(intsts);     /* 割込み禁止*/
 
-    for(i = 0; i < CNF_MAX_TSKID; i++) {    // 未使用のTCBを検索
+    for(i = 0; i < CNF_MAX_TSKID; i++) {    /* 未使用のTCBを検索*/
         if(tcb_tbl[i].state == TS_NONEXIST) break; 
     }
     /* TCBの初期化 */
@@ -37,14 +47,20 @@ ID tk_cre_tsk( const T_CTSK *pk_ctsk )
 
         tskid = i+1;
     } else {
-        tskid = (ID)E_LIMIT;    // タスクが既に最大数
+        tskid = (ID)E_LIMIT;    /* タスクが既に最大数*/
     }
 
-    EI(intsts);      // 割込み許可
+    EI(intsts);      /* 割込み許可*/
     return tskid;
 }
 
-/* タスク実行API */
+/*********************************************************************************/
+/* 関数   | ER tk_sta_tsk( ID tskid, INT stacd )                                  */
+/* 説明   | タスク実行API                                                          */
+/* 引数   | ID tskid, INT stacd                                                  */
+/* 戻り値 | ER                                                                    */
+/* 作成   | 2025 / 10 /01                                                         */
+/*********************************************************************************/
 ER tk_sta_tsk( ID tskid, INT stacd )
 {
     TCB     *tcb;
@@ -53,33 +69,42 @@ ER tk_sta_tsk( ID tskid, INT stacd )
 
     /* 引数チェック */
     if(tskid <= 0 || tskid > CNF_MAX_TSKID) return E_ID;
-    DI(intsts);     // 割込み禁止
+    DI(intsts);     /* 割込み禁止*/
 
     tcb = &tcb_tbl[tskid-1];
-    if(tcb->state == TS_DORMANT) {  // タスクを実行できる状態に変更
+    if(tcb->state == TS_DORMANT) {  /* タスクを実行できる状態に変更 */
         tcb->state = TS_READY;
         tcb->context = make_context(tcb->stkadr, tcb->stksz, tcb->tskadr);
         tqueue_add_entry(&ready_queue[tcb->itskpri], tcb);
-        scheduler();                // スケジューラを実行
+        scheduler();                /* スケジューラを実行 */
     } else {
-        err = E_OBJ;  // タスクを実行できない（休止状態ではない）
+        err = E_OBJ;  /* タスクを実行できない（休止状態ではない） */
     }
 
-    EI(intsts);     // 割込み許可
+    EI(intsts);     /* 割込み許可 */
     return err;
 }
 
-/* タスクの動作終了API */
+/*********************************************************************************/
+/* 関数   | void tk_ext_tsk( void )                                              */
+/* 説明   | タスクの動作終了API                                                     */
+/* 引数   | なし                                                                  */
+/* 戻り値 | なし                                                                   */
+/* 作成   | 2025 / 10 /01                                                         */
+/*********************************************************************************/
 void tk_ext_tsk( void )
 {
     UINT	intsts;
 
-    DI(intsts);     // 割込み禁止
+    DI(intsts);     /*割込み禁止*/ 
 
-    cur_task->state	= TS_DORMANT;    // タスクを休止状態へ
+    cur_task->state	= TS_DORMANT;    /*タスクを休止状態へ*/
     tqueue_remove_top(&ready_queue[cur_task->itskpri]);
 
-    scheduler();                    // スケジューラを実行
-    EI(intsts);     // 割込み許可
+    scheduler();                    /*スケジューラを実行*/ 
+    EI(intsts);     /*割込み許可*/ 
 }
 
+/*********************************************************************************/
+/* EOF                                                                           */
+/*********************************************************************************/

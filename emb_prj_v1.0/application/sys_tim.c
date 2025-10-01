@@ -1,14 +1,24 @@
-/* 
- *** Try Kernel
- *      システムタイマ
-*/
+/*********************************************************************************/
+/* Copyright OGAWA CONST                                                         */
+/*********************************************************************************/
+/* file : sys_tim.c                                                            */
+/* abst : task scheduler                                                         */
+/* hist : 2025 / 10 /01                                                          */
+/*********************************************************************************/
 
 #include <trykernel.h>
 #include <knldef.h>
 
-TCB *wait_queue;    /* 時間待ち状態のタスクの待ち行列(ウェイトキュー) */
+TCB *wait_queue;                      /* 時間待ち状態のタスクの待ち行列(ウェイトキュー) */
 
-/* システムタイマ割込みハンドラ */
+
+/*********************************************************************************/
+/* 関数   | void systimer_handler(void)                                           */
+/* 説明   | システムタイマ割込みハンドラ                                              */
+/* 引数   | なし                                                                   */
+/* 戻り値 | なし                                                                   */
+/* 作成   | 2025 / 10 /01                                                         */
+/*********************************************************************************/
 void systimer_handler(void)
 {
     TCB     *tcb, *next;
@@ -18,20 +28,24 @@ void systimer_handler(void)
         if(tcb->waitim == TMO_FEVR) {
             continue;
         } else if(tcb->waitim > TIMER_PERIOD) {
-            tcb->waitim -= TIMER_PERIOD;  // 待ち時間から経過時間を減じる。
-        } else {                          // 待ち時間が経過したタスクを実行できる状態に戻す
-            tqueue_remove_entry( &wait_queue, tcb);             // タスクをウェイトキューから外す
+            tcb->waitim -= TIMER_PERIOD;            /* 待ち時間から経過時間を減じる。 */
+        } else {                      /* 待ち時間が経過したタスクを実行できる状態に戻す */
+            tqueue_remove_entry( &wait_queue, tcb); /* タスクをウェイトキューから外す */
 
             if(tcb->waifct == TWFCT_DLY) {
-                *tcb->waierr = E_OK;         // tk_dly_tskからの復帰はエラー無し
+                *tcb->waierr = E_OK;             /* tk_dly_tskからの復帰はエラー無し */
             } else {
-                *tcb->waierr = E_TMOUT;      // タイムアウト・エラー
+                *tcb->waierr = E_TMOUT;                      /* タイムアウト・エラー */
             }
 
             tcb->state      = TS_READY;
             tcb->waifct     = TWFCT_NON;
-            tqueue_add_entry( &ready_queue[tcb->itskpri], tcb); // タスクをレディキューにつなぐ
+            tqueue_add_entry( &ready_queue[tcb->itskpri], tcb); /* タスクをレディキューにつなぐ*/
         }
     }
-    scheduler();        // スケジューラを実行する
+    scheduler();        /* スケジューラを実行する */
 }
+
+/*********************************************************************************/
+/* EOF                                                                           */
+/*********************************************************************************/
