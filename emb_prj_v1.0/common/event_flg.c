@@ -1,7 +1,10 @@
-/* 
- *** Try Kernel
- *      イベントフラグ
-*/
+/*********************************************************************************/
+/* Copyright OGAWA CONST                                                         */
+/*********************************************************************************/
+/* file : event_flg.c                                                            */
+/* abst : event flag                                                             */
+/* hist : 2025 / 10 /02                                                          */
+/*********************************************************************************/
 
 #include <trykernel.h>
 #include <knldef.h>
@@ -9,6 +12,13 @@
 FLGCB   flgcb_tbl[CNF_MAX_FLGID];     /* イベントフラグ管理ブロック(FLGCB) */
 
 /* イベントフラグの生成API */
+/*********************************************************************************/
+/* 関数   | tk_cre_flg( const T_CFLG *pk_cflg )                                   */
+/* 説明   | イベントフラグの生成API                                                  */
+/* 引数   | onst T_CFLG *pk_cflg                                                  */
+/* 戻り値 | ID                                                                    */
+/* 作成   | 2025 / 10 /02                                                         */
+/*********************************************************************************/
 ID tk_cre_flg( const T_CFLG *pk_cflg )
 {
     ID      flgid;
@@ -29,6 +39,13 @@ ID tk_cre_flg( const T_CFLG *pk_cflg )
 }
 
 /* イベントフラグ待ちの条件チェック */
+/*********************************************************************************/
+/* 関数   | check_flag(UINT flgptn, UINT waiptn, UINT wfmode)                     */
+/* 説明   | イベントフラグ待ちの条件チェック                                            */
+/* 引数   | UINT flgptn, UINT waiptn, UINT wfmode                                 */
+/* 戻り値 | BOOL                                                                    */
+/* 作成   | 2025 / 10 /02                                                         */
+/*********************************************************************************/
 static BOOL check_flag(UINT flgptn, UINT waiptn, UINT wfmode)
 {
     if(wfmode & TWF_ORW) {
@@ -84,6 +101,13 @@ ER tk_set_flg( ID flgid, UINT setptn )
 }
 
 /* イベントフラグのクリアAPI */
+/*********************************************************************************/
+/* 関数   | tk_clr_flg( ID flgid, UINT clrptn )                                   */
+/* 説明   | イベントフラグのクリアAPI                                                 */
+/* 引数   | ID flgid, UINT clrptn.                                                */
+/* 戻り値 | ER                                                                   */
+/* 作成   | 2025 / 10 /02                                                         */
+/*********************************************************************************/
 ER tk_clr_flg( ID flgid, UINT clrptn )
 {
     FLGCB   *flgcb;
@@ -104,6 +128,13 @@ ER tk_clr_flg( ID flgid, UINT clrptn )
 }
 
 /* イベントフラグ待ちAPI */
+/************************************************************************************/
+/* 関数   |tk_wai_flg( ID flgid, UINT waiptn, UINT wfmode, UINT *p_flgptn, TMO tmout)*/
+/* 説明   | イベントフラグ待ちAPI                                                       */
+/* 引数   | ID flgid, UINT waiptn, UINT wfmode, UINT *p_flgptn, TMO tmout            */
+/* 戻り値 | ER                                                                        */
+/* 作成   | 2025 / 10 /02                                                            */
+/************************************************************************************/
 ER tk_wai_flg( ID flgid, UINT waiptn, UINT wfmode, UINT *p_flgptn, TMO tmout )
 {
     FLGCB   *flgcb;
@@ -148,3 +179,7 @@ ER tk_wai_flg( ID flgid, UINT waiptn, UINT wfmode, UINT *p_flgptn, TMO tmout )
     EI(intsts);     // 割込み許可
     return err;
 }
+
+/*********************************************************************************/
+/* EOF                                                                           */
+/*********************************************************************************/
