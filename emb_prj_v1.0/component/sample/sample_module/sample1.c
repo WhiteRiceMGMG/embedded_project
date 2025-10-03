@@ -43,7 +43,12 @@
 void vdg_ymt_sampleif_function( void )
 {
     u2 temp = (u2)1 + (u2)2 + (u2)3;
+
+    /* di() */ /* 割り込み禁止 */
+
     u2g_ogw_sample_variable = (u2)temp;
+
+    /* ei() */ /* 割り込み許可 */
 }
 
 /*********************************************************************************/
@@ -56,8 +61,12 @@ void vdg_ymt_sampleif_function( void )
 
 u2   u2g_ogw_sampleif_function( u2 *pPara)
 {
+    /* di() */ /* 割り込み禁止 */
+    
     str_flg8_ymt_sample_flag8.bi1 = 1;
     str_flg8_ymt_sample_flag8.bi3 = 0;
+
+    /* ei() */ /* 割り込み許可 */
 }
 
 /*---------------------------------▲▲▲(要設定)--------------------------------*/
