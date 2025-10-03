@@ -12,6 +12,18 @@
 
 #include <stdint.h>
 
+typedef struct 
+{ 
+    u1 bi0 : 1,
+    u1 bi1 : 1,
+    u1 bi2 : 1,
+    u1 bi3 : 1,
+    u1 bi4 : 1,
+    u1 bi5 : 1,
+    u1 bi6 : 1,
+    u1 bi7 : 1,
+} str_flg8;
+
 /* 符号付き整数 */
 typedef int8_t              B;      /* 8 bit */
 typedef int16_t             H;      /* 16 bit */

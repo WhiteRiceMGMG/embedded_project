@@ -8,16 +8,16 @@
 #include <trykernel.h>
 #include <knldef.h>
 
-TCB *ready_queue[CNF_MAX_TSKPRI];    /* タスクのレディキュー                       */
-TCB *cur_task;                       /* 実行中のタスク                             */                             
-TCB *sche_task;                      /* 次に実行するタスク                         */
+TCB *ready_queue[CNF_MAX_TSKPRI];    /* タスクのレディキュー                     */
+TCB *cur_task;                       /* 実行中のタスク                           */                             
+TCB *sche_task;                      /* 次に実行するタスク                       */
 
-UW  disp_running;                    /* ディスパッチャ実行中                        */
+UW  disp_running;                    /* ディスパッチャ実行中                     */
 
 /*********************************************************************************/
 /* 関数   | scheduler                                                            */
-/* 引数   | なし                                                                  */
-/* 戻り値 | なし                                                                  */
+/* 引数   | なし                                                                 */
+/* 戻り値 | なし                                                                 */
 /* 作成   | 2025 / 10 /01                                                        */
 /*********************************************************************************/
 void scheduler(void)
@@ -31,10 +31,10 @@ void scheduler(void)
     if(i < CNF_MAX_TSKPRI) {
         sche_task = ready_queue[i];
     } else {
-        sche_task = NULL;    /* 実行できるタスクは無い                             */
+        sche_task = NULL;    /* 実行できるタスクは無い                           */
     }
     if(sche_task != cur_task && !disp_running) {
-        dispatch();         /* ディスパッチャを実行                                */
+        dispatch();         /* ディスパッチャを実行                              */
     }
 }
 

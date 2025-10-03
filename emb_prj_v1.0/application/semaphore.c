@@ -14,11 +14,11 @@ SEMCB   semcb_tbl[CNF_MAX_SEMID];       /* セマフォ管理ブロック(SEMCB)
 
 
 /*********************************************************************************/
-/* 関数   | ID_tk_cre_sem ( const T_CSEM *pk_csem )                               */
-/* 説明   | セマフォの生成API                                                      */
-/* 引数   | T_CSEM *pk_csem                                                       */
-/* 戻り値 | ID                                                                    */
-/* 作成   | 2025 / 10 /01                                                         */
+/* 関数   | ID_tk_cre_sem ( const T_CSEM *pk_csem )                              */
+/* 説明   | セマフォの生成API                                                    */
+/* 引数   | T_CSEM *pk_csem                                                      */
+/* 戻り値 | ID                                                                   */
+/* 作成   | 2025 / 10 /01                                                        */
 /*********************************************************************************/
 ID tk_cre_sem( const T_CSEM *pk_csem )
 {
@@ -42,11 +42,11 @@ ID tk_cre_sem( const T_CSEM *pk_csem )
 }
 
 /*********************************************************************************/
-/* 関数   | ER tk_wai_sem( ID semid, INT cnt, TMO tmout )                         */
-/* 説明   | セマフォの資源獲得API                                                   */
-/* 引数   | ID semid, INT cnt, TMO tmout                                          */
-/* 戻り値 | ER                                                                    */
-/* 作成   | 2025 / 10 /01                                                         */
+/* 関数   | ER tk_wai_sem( ID semid, INT cnt, TMO tmout )                        */
+/* 説明   | セマフォの資源獲得API                                                */
+/* 引数   | ID semid, INT cnt, TMO tmout                                         */
+/* 戻り値 | ER                                                                   */
+/* 作成   | 2025 / 10 /01                                                        */
 /*********************************************************************************/
 ER tk_wai_sem( ID semid, INT cnt, TMO tmout )              /* セマフォの資源獲得API */
 {
@@ -87,11 +87,11 @@ ER tk_wai_sem( ID semid, INT cnt, TMO tmout )              /* セマフォの資
 /* セマフォの資源返却API */
 
 /*********************************************************************************/
-/* 関数   | ER tk_sig_sem( ID semid, INT cnt )                                    */
-/* 説明   | セマフォの資源返却API                                                    */
-/* 引数   | ID semid, INT cnt                                                     */
-/* 戻り値 | ER                                                                    */
-/* 作成   | 2025 / 10 /01                                                         */
+/* 関数   | ER tk_sig_sem( ID semid, INT cnt )                                   */
+/* 説明   | セマフォの資源返却API                                                */
+/* 引数   | ID semid, INT cnt                                                    */
+/* 戻り値 | ER                                                                   */
+/* 作成   | 2025 / 10 /01                                                        */
 /*********************************************************************************/
 ER tk_sig_sem( ID semid, INT cnt )
 {
