@@ -1,6 +1,6 @@
 汎用目的組み込みプロジェクトプロトタイプ
 
-emb_prj_v1.0 
+emb_prj_v2.0 
 ├── application           Application Layer
 │   ├── init_tsk.c   
 │   ├── scheduler.c
