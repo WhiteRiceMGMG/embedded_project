@@ -30,8 +30,9 @@
 #define NUMBER_OF_DRVMD   (u1)4    /* ドライブモードの数 */
 #define NUMBER_OFDRVMDSW  (u1)2.   /* スイッチの数 */
 
-#define DRVMDSWUP_IS_PUSHED (u1)0; /* ドライブモードスイッチ UP 押下状態 */
-#define DRVMDSWDW_IS_PUSHED (u1)1; /* ドライブモードスイッチ DOWN 押下状態 */
+#define DRVMDSWUP_IS_PUSHED   (u1)0; /* ドライブモードスイッチ UP 押下状態   */
+#define DRVMDSWDW_IS_PUSHED   (u1)1; /* ドライブモードスイッチ DOWN 押下状態 */
+#define DRVMDSW_IS_ERROR (u1)2; /* ドライブモードスイッチ 非押下状態    */
 
 enum 
 {
@@ -86,6 +87,12 @@ void vdg_ogw_get_drvmd( void )
         u1g_ogw_crtdrvmd = NEXT_DRVMD_TBL[u1s_temp_pastdrvmd][u1s_temp_drvmdsw_pushed];
         
     }
+
+    if(u1s_temp_drvmdsw_pushed == DDRVMDSW_IS_ERROR)
+    {
+        u1g_ogw_crtdrvmd = u1s_temp_pastdrvmd; /* ボタン状態エラーなら遷移しない */
+    } 
+
 }
 
 
@@ -105,9 +112,14 @@ void vdg_ogw_get_drvmd( void )
 /* 作成   | 2025 / 10 /06                                                        */
 /*********************************************************************************/
 
-static void vds_ogw_sample_function1( void )
+static u1 u1s_drvmdsw_conf( void ) 
 {
-    ;
+    /*え～と，最終的にはドライブスイッチ状態を帰したいから，．，，
+    まずテンポラリカウンタ用意して，100カウント以上なら押下判定にする？
+    で，カウントが500以上になったら固着状態にするか．．．
+    後，スイッチの同時押しとかもエラーにするンゴ．
+    で，呼び出し元の関数は，エラーの時は繊維なしってことにするか
+    */
 }
 
 /*********************************************************************************/
