@@ -37,10 +37,10 @@
 
 enum 
 {
-    DRIVE_MODE_ECO    = 0,         /* ドライブモード : ECO */
-    DRIVE_MODE_NORMAL = 1,         /* ドライブモード : NORMAL */
-    DRIVE_MODE_SPORT  = 2,         /* ドライブモード : SPORT */
-    MODE_OVER_DRIVE   = 3          /* ドライブモード : OVER_DRIVE(解放フルバースト) */
+    DRIVE_MODE_ECO    = 0,      /* ドライブモード : ECO */
+    DRIVE_MODE_NORMAL = 1,      /* ドライブモード : NORMAL */
+    DRIVE_MODE_SPORT  = 2,      /* ドライブモード : SPORT */
+    MODE_OVER_DRIVE   = 3       /* ドライブモード : OVER_DRIVE(解放フルバースト) */
 }
 
 /*---------------------------------▲▲▲(要設定)--------------------------------*/
