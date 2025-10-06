@@ -27,8 +27,11 @@
 /* drvmd.hに記載のためコメントアウト */
 /* #define DRVMDSW_STATUS_SUCESS (u1)1; */
 /* #define DRVMDSW_STATUS_FAILED (u1)0; */
-#define NUMBER_OF_DRVMD   (u1)4
-#define NUMBER_OFDRVMDSW  (u1)2
+#define NUMBER_OF_DRVMD   (u1)4    /* ドライブモードの数 */
+#define NUMBER_OFDRVMDSW  (u1)2.   /* スイッチの数 */
+
+#define DRVMDSWUP_IS_PUSHED (u1)0; /* ドライブモードスイッチ UP 押下状態 */
+#define DRVMDSWDW_IS_PUSHED (u1)1; /* ドライブモードスイッチ DOWN 押下状態 */
 
 enum 
 {
