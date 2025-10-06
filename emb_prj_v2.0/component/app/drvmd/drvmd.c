@@ -34,11 +34,13 @@
 /*********************************************************************************/
 
 /*---------------------------------▼▼▼(要設定)--------------------------------*/
+/* 現在のモードと押されたボタン(UP or DOWN)により次のモードに移行する． */
 u1 NEXT_DRVMD_TBL[NUMVER_OF_DRVMD][NUMBER_OF_DRVMDSW] =
-{
-    {DRIVE_MODE_ECO, DRIVE_MODE_NORMAL},
-    {DRIVE_MODE_ECO, DRIVE_MODE_SPORT},
-    {DRIVE_MODE_}
+{ /* DOWN が押されたとき  UPが押されたとき     */
+    {DRIVE_MODE_ECO,      DRIVE_MODE_NORMAL}, /* 現在モード : ECO */
+    {DRIVE_MODE_ECO,      DRIVE_MODE_SPORT},  /* 現在モード : NORMAL */
+    {DRIVE_MODE_NORMAL,   MODE_OVER_DRIVE},   /* 現在モード : SPORT */
+    {DRIVE_MODE_SPORT,    MODE_OVER_DRIVE}    /* 現在モード : OVER_DRIVE(解放フルバースト) */
 }
 /*---------------------------------▲▲▲(要設定)--------------------------------*/
 
