@@ -30,6 +30,19 @@
 /*---------------------------------▲▲▲(要設定)--------------------------------*/
 
 /*********************************************************************************/
+/* 変数定義                                                                    */
+/*********************************************************************************/
+
+/*---------------------------------▼▼▼(要設定)--------------------------------*/
+u1 NEXT_DRVMD_TBL[NUMVER_OF_DRVMD][NUMBER_OF_DRVMDSW] =
+{
+    {DRIVE_MODE_ECO, DRIVE_MODE_NORMAL},
+    {DRIVE_MODE_ECO, DRIVE_MODE_SPORT},
+    {DRIVE_MODE_}
+}
+/*---------------------------------▲▲▲(要設定)--------------------------------*/
+
+/*********************************************************************************/
 /* コンポーネント外部公開関数定義                                                */
 /*********************************************************************************/
 
@@ -44,20 +57,16 @@
 /*********************************************************************************/
 
 void vdg_ogw_get_drvmd( void )
-{
-    vds_drvmd_pwon();  /* ドライブモードとスイッチの固着状態の初期化を行う．    
-    
-    
-    
-    
-    
-    */
-    u1 u1s_temp_drvmdsw_status = (u1)DRVMDSW_STATUS_FAILED; /* デフォルトはFailed*/
-    
-    u1s_temp_drvmdsw_status = u1s_ogw_get_drvmdsw_stasus();     /* 固着状態取得  */
-    
-    if(u1s_temp_drvmdsw_status == (u1)DRVMDSW_STATUS_SUCESS) 
+{  
+    u1 u1s_temp_pastdrvmd   = u1g_ogw_crtdrvmd;      /* 現在のドライブモード取得 */
+
+    u1 u1s_temp_drvmdsw_pushed =  u1s_drvmdsw_conf();        /* ボタン押下を確認 */
+
+    if((u1s_temp_drvmdsw_pushed == DRVMDSWUP_IS_PUSHED)
+     ||(u1s_temp_drvmdsw_pushed == DRVMDSWDW_IS_PUSHED))
     {
+        /* スイッチ種類と現在のモードを代入すると移行先のモードが設定される */
+        u1g_ogw_crtdrvmd = NEXT_DRVMD_TBL[u1s_temp_pastdrvmd][u1s_temp_drvmdsw_pushed];
         
     }
 }
