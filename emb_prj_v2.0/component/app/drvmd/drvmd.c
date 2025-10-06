@@ -51,10 +51,10 @@ enum
 /*---------------------------------▼▼▼(要設定)--------------------------------*/
 /* 現在のモードと押されたボタン(UP or DOWN)により次のモードに移行する． */
 u1 NEXT_DRVMD_TBL[NUMVER_OF_DRVMD][NUMBER_OF_DRVMDSW] =
-{ /* DOWN が押されたとき  UPが押されたとき     */
-    {DRIVE_MODE_ECO,      DRIVE_MODE_NORMAL},   /* 現在モード : ECO    */
-    {DRIVE_MODE_ECO,      DRIVE_MODE_SPORT },   /* 現在モード : NORMAL */
-    {DRIVE_MODE_NORMAL,   MODE_OVER_DRIVE  },   /* 現在モード : SPORT  */
+{ /* DOWN が押されたとき  UPが押されたとき                              */
+    {DRIVE_MODE_ECO,      DRIVE_MODE_NORMAL},   /* 現在モード : ECO     */
+    {DRIVE_MODE_ECO,      DRIVE_MODE_SPORT },   /* 現在モード : NORMAL  */
+    {DRIVE_MODE_NORMAL,   MODE_OVER_DRIVE  },   /* 現在モード : SPORT   */
     {DRIVE_MODE_SPORT,    MODE_OVER_DRIVE. }    /* 現在モード : OVER_DRIVE(解放フルバースト) */
 }
 /*---------------------------------▲▲▲(要設定)--------------------------------*/
@@ -70,7 +70,7 @@ u1 NEXT_DRVMD_TBL[NUMVER_OF_DRVMD][NUMBER_OF_DRVMDSW] =
 /* 説明   | ドライブモード取得関数宣言   初期化関数を実行しておくこと            */
 /* 引数   | なし                                                                 */
 /* 戻り値 | なし                                                                 */
-/* 作成   | 2025 / 10 /04                                                        */
+/* 作成   | 2025 / 10 /06                                                        */
 /*********************************************************************************/
 
 void vdg_ogw_get_drvmd( void )
@@ -98,11 +98,11 @@ void vdg_ogw_get_drvmd( void )
 /*---------------------------------▼▼▼(要設定)--------------------------------*/
 
 /*********************************************************************************/
-/* 関数   | vds_ogw_sample_function1( void )                                     */
-/* 説明   | サンプル関数1宣言                                                    */
+/* 関数   | u1s_drvmdsw_conf( void )                                             */
+/* 説明   | 押下ボタン種類判定                                                   */
 /* 引数   | なし                                                                 */
-/* 戻り値 | なし                                                                 */
-/* 作成   | 2025 / 10 /03                                                        */
+/* 戻り値 | u1                                                                   */
+/* 作成   | 2025 / 10 /06                                                        */
 /*********************************************************************************/
 
 static void vds_ogw_sample_function1( void )
