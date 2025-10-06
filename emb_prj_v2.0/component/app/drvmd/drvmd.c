@@ -34,13 +34,15 @@
 #define DRVMDSWDW_IS_PUSHED   (u1)1; /* ドライブモードスイッチ DOWN 押下状態 */
 #define DRVMDSW_IS_ERROR (u1)2; /* ドライブモードスイッチ 非押下状態    */
 
+/*-------------------- drvmdif.h に記載のためコメントアウト ----------------------
 enum 
 {
-    DRIVE_MODE_ECO    = 0,         /* ドライブモード : ECO */
-    DRIVE_MODE_NORMAL = 1,         /* ドライブモード : NORMAL */
-    DRIVE_MODE_SPORT  = 2,         /* ドライブモード : SPORT */
-    MODE_OVER_DRIVE   = 3          /* ドライブモード : OVER_DRIVE(解放フルバースト) */
+    DRIVE_MODE_ECO    = 0,         
+    DRIVE_MODE_NORMAL = 1,         
+    DRIVE_MODE_SPORT  = 2,         
+    MODE_OVER_DRIVE   = 3          
 }
+---------------------------------------------------------------------------------*/
 
 
 /*---------------------------------▲▲▲(要設定)--------------------------------*/

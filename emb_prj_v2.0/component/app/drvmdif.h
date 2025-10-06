@@ -35,9 +35,14 @@
 #define DRVMDSW_STATUS_SUCESS (u1)1
 #define DRVMDSW_STATUS_FAILED (u1)0
 
-#define DRVMD_STATUS_ECO (u1)1
-#define DRVMD_STATUS_NML (u1)2
-#define DRVMD_STATUS_SPT (u1)3
+enum 
+{
+    DRIVE_MODE_ECO    = 0,         /* ドライブモード : ECO */
+    DRIVE_MODE_NORMAL = 1,         /* ドライブモード : NORMAL */
+    DRIVE_MODE_SPORT  = 2,         /* ドライブモード : SPORT */
+    MODE_OVER_DRIVE   = 3          /* ドライブモード : OVER_DRIVE(解放フルバースト) */
+}
+
 /*---------------------------------▲▲▲(要設定)--------------------------------*/
 
 /*********************************************************************************/
