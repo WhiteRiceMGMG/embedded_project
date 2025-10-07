@@ -32,7 +32,8 @@
 
 #define DRVMDSWUP_IS_PUSHED   (u1)0; /* ドライブモードスイッチ UP 押下状態   */
 #define DRVMDSWDW_IS_PUSHED   (u1)1; /* ドライブモードスイッチ DOWN 押下状態 */
-#define DRVMDSW_IS_ERROR (u1)2; /* ドライブモードスイッチ 非押下状態    */
+#define DRVMDSW_IS_NOT_PUSHED (u1)2; /* ドライブモードスイッチ 非押下状態    */
+#define DRVMDSW_IS_ERRORA     (u1)3; /* ドライブモードスイッチ エラー状態*/
 
 /*-------------------- drvmdif.h に記載のためコメントアウト ----------------------
 enum 
@@ -122,9 +123,46 @@ static u1 u1s_drvmdsw_conf( void )
     後，スイッチの同時押しとかもエラーにするンゴ．
     で，呼び出し元の関数は，エラーの時は繊維なしってことにするか
     */
-    u2 u2s_temp_drvmdswup_cnt;
-    u2 u2s_temp_drvmdswdw_cnt;
+    static u2 u2s_temp_drvmdswup_cnt = 0;
+    static u2 u2s_temp_drvmdswdw_cnt = 0;
+
+    if(KED.DRVMDSWUP.PUSHED())
+    {
+        u2s_temp_drvmdswup_cnt = u2s_temp_drvmdswup_cnt + 1;
+        /* 一応上限ガード */
+        if(u2s_temp_drvmdswup_cnt >= DRVMDSW_CNT_MAX)
+        {
+            u2s_temp_drvmdswup_cnt = DRVMDSW_CNT_MAX;
+        }
+    }
+    else
+    {
+        if(u2s_temp_drvmdswup_cnt > 0)
+        {
+            u2s_temp_drvmdswup_cnt = u2s_temp_drvmdswup_cnt - 1;
+        }
+    }
+
+    if(KED.DRVMDSWDW.PUSHED())
+    {
+        u2s_temp_drvmdswdw_cnt = u2s_temp_drvmdswdw_cnt + 1;
+        /* 一応上限ガード */
+        if(u2s_temp_drvmdswdw_cnt >= DRVMDSW_CNT_MAX)
+        {
+            u2s_temp_drvmdswdw_cnt = DRVMDSW_CNT_MAX;
+        }
+    }
+    else
+    {
+        if(u2s_temp_drvmdswdw_cnt > 0)
+        {
+            u2s_temp_drvmdswdw_cnt = u2s_temp_drvmdswdw_cnt - 1;
+        }
+    }
+
+    /* 同時押しは固着モード判定にする． */
     
+
 
 
 }
@@ -147,3 +185,5 @@ static u2 u2s_ogw_sample_function2( u2 u2_sample )
 /*********************************************************************************/
 /* EOF                                                                           */
 /*********************************************************************************/
+
+
