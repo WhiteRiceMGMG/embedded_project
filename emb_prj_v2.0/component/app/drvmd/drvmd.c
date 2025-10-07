@@ -161,7 +161,14 @@ static u1 u1s_drvmdsw_conf( void )
     }
 
     /* 同時押しは固着モード判定にする． */
+    if((u2s_temp_drvmdswup_cnt >= DRVMDSW_CNT_MAX)
+     ||(u2s_temp_drvmdswdw_cnt >= DRVMDSW_CNT_MAX))
+    {
+        u1s_temp_drvmdsw_pushed = DRVMDSW_IS_ERRORA;
+    }
+
     
+
 
 
 
