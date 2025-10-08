@@ -125,6 +125,7 @@ static u1 u1s_drvmdsw_conf( void )
     */
     static u2 u2s_temp_drvmdswup_cnt = 0;
     static u2 u2s_temp_drvmdswdw_cnt = 0;
+    u1 u1s_temp_drvmdsw_pushsts = DRVMDSW_IS_NOT_PUSHED;
 
     if(KED.DRVMDSWUP.PUSHED())
     {
@@ -164,9 +165,29 @@ static u1 u1s_drvmdsw_conf( void )
     if((u2s_temp_drvmdswup_cnt >= DRVMDSW_CNT_MAX)
      ||(u2s_temp_drvmdswdw_cnt >= DRVMDSW_CNT_MAX))
     {
-        u1s_temp_drvmdsw_pushed = DRVMDSW_IS_ERRORA;
+        u1s_temp_drvmdsw_pushsts = DRVMDSW_IS_ERRORA;
     }
 
+    /* UPカウントが押下定義時間を超えたらUP押下判定 */
+    if(u2s_temp_drvmdswup_cnt >= DRVMDSW_PUSHED_DEFINE)
+    {
+        u1s_temp_drvmdsw_pushsts = DRVMDSWUP_IS_PUSHED;
+    }
+
+    /* DWカウントが押下定義時間を超えたDWP押下判定 */
+    if(u2s_temp_drvmdswdw_cnt >= DRVMDSW_PUSHED_DEFINE)
+    {
+        u1s_temp_drvmdsw_pushsts = DRVMDSWDW_IS_PUSHED;
+    }
+
+    /* UP or DWカウントが固着定義時間を超えたら固着判定 */
+    if((u2s_temp_drvmdswup_cnt >= DRVMDSW_HOLD_DEFINE)
+     ||(u2s_temp_drvmdswsw_cnt >= DRVMDSW_HOLD_DEFINE))
+    {
+       u1s_temp_drvmdsw_pushsts = DRVMDSW_IS_ERRORA;
+    }
+
+    return u1s_temp_drvmdsw_pushsts;
     
 
 
