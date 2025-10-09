@@ -12,8 +12,8 @@
 
 /*---------------------------------▼▼▼(要設定)--------------------------------*/
 
-#ifndef SAMPLEIF_H
-#define SAMPLEIF_H
+#ifndef DRVMDIF_H
+#define DRVMDIF_H
 
 /*---------------------------------▲▲▲(要設定)--------------------------------*/
 
@@ -37,10 +37,11 @@
 
 enum 
 {
-    DRIVE_MODE_ECO    = 0,      /* ドライブモード : ECO */
-    DRIVE_MODE_NORMAL = 1,      /* ドライブモード : NORMAL */
-    DRIVE_MODE_SPORT  = 2,      /* ドライブモード : SPORT */
-    MODE_OVER_DRIVE   = 3       /* ドライブモード : OVER_DRIVE(解放フルバースト) */
+    DRIVE_MODE_ECO          = 0,      /* ドライブモード : ECO */
+    DRIVE_MODE_NORMAL       = 1,      /* ドライブモード : NORMAL */
+    DRIVE_MODE_SPORT        = 2,      /* ドライブモード : SPORT */
+    DRIVE_MODE_OVER_DRIVE   = 3,      /* ドライブモード : OVER_DRIVE(解放フルバースト) */
+    DRIVE_MODE_NUM                    /* ドライブモードの数 */
 }
 
 /*---------------------------------▲▲▲(要設定)--------------------------------*/

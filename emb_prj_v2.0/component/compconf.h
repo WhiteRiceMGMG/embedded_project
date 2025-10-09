@@ -28,9 +28,10 @@
 /* マクロ定義                                                                    */
 /*********************************************************************************/
 /*---------------------------------▼▼▼(要設定)--------------------------------*/
-#define DRVMDSW_HOLD_TIME_DEFINE   (u2)500
-#define DRVMDSW_PUSHED_TIME_DEFINE (u2)100
-#define DRVMDSW_CNT_TIME_MAX       (u2)1000
+/* cpmponent/app/drvmdif.hで使用 */
+#define DRVMDSW_HOLD_TIME_DEFINE   (u2)500  /* 固着時間定義 */
+#define DRVMDSW_PUSHED_TIME_DEFINE (u2)100  /* 押下時間定義 */
+#define DRVMDSW_CNT_TIME_MAX       (u2)1000 /* スイッチカウント上限定義 */
 /*---------------------------------▲▲▲(要設定)--------------------------------*/
 
 
