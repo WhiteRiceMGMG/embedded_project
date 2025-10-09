@@ -30,10 +30,10 @@
 #define NUMBER_OF_DRVMD   (u1)4    /* ドライブモードの数 */
 #define NUMBER_OFDRVMDSW  (u1)2.   /* スイッチの数 */
 
-#define DRVMDSWUP_IS_PUSHED   (u1)0; /* ドライブモードスイッチ UP 押下状態   */
-#define DRVMDSWDW_IS_PUSHED   (u1)1; /* ドライブモードスイッチ DOWN 押下状態 */
-#define DRVMDSW_IS_NOT_PUSHED (u1)2; /* ドライブモードスイッチ 非押下状態    */
-#define DRVMDSW_IS_ERRORA     (u1)3; /* ドライブモードスイッチ エラー状態*/
+#define DRVMDSWUP_IS_PUSHED   (u1)0;     /* ドライブモードスイッチ UP 押下状態   */
+#define DRVMDSWDW_IS_PUSHED   (u1)1;     /* ドライブモードスイッチ DOWN 押下状態 */
+#define DRVMDSW_IS_NOT_PUSHED (u1)2;     /* ドライブモードスイッチ 非押下状態    */
+#define DRVMDSW_IS_ERRORA     (u1)3;         /* ドライブモードスイッチ エラー状態*/
 
 /*-------------------- drvmdif.h に記載のためコメントアウト ----------------------
 enum 
