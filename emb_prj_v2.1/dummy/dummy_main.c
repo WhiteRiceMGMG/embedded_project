@@ -24,8 +24,11 @@
 /*********************************************************************************/
 void main(void)
 {
-    define_dummyfunc();
-    reference_interface();
+    while(1)
+    {
+        define_dummyfunc();
+        reference_interface();
+    }
 }
  
 void define_dummyfunc( void )
@@ -35,7 +38,7 @@ void define_dummyfunc( void )
 
 void reference_interface( void );
 {
-    
+    printf("%d", )
 }
 
 /*********************************************************************************/
