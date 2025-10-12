@@ -17,7 +17,7 @@
 /*********************************************************************************/
 /* #include "../component/compconf.h"        /* 自ヘッダでインクルード済 */
 /* #include "../component/app/drvmdif.h" */  /* 自ヘッダでインクルード済 */
-#included "dyummy_main.h"
+#include "./dummy_main.h"
 
 /*********************************************************************************/
 /* テスト用メイン関数定義                                                        */
@@ -38,7 +38,8 @@ void define_dummyfunc( void )
 
 void reference_interface( void );
 {
-    printf("%d", )
+    printf("%d",u1g_ogw_crtdrvm);
+    printf("%d",u1g_ogw_drvmdsw_status);
 }
 
 /*********************************************************************************/
