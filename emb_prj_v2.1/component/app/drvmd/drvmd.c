@@ -92,7 +92,7 @@ static u1 u1s_drvmdsw_conf( void )
     static u2 u2s_temp_drvmdswdw_cnt = 0;
     u1 u1s_temp_drvmdsw_pushsts = (u1)DRVMDSW_IS_NOT_PUSHED;
 
-    if(KED.DRVMDSWUP.PUSHED())
+    if(Ked.DrvmdSwUp.Pushed())
     {
         u2s_temp_drvmdswup_cnt = u2s_temp_drvmdswup_cnt + 1;
         /* 一応上限ガード */
@@ -109,7 +109,7 @@ static u1 u1s_drvmdsw_conf( void )
         }
     }
 
-    if(KED.DRVMDSWDW.PUSHED())
+    if(Ked.DrvmdSwDw.Pushed())
     {
         u2s_temp_drvmdswdw_cnt = u2s_temp_drvmdswdw_cnt + 1;
         /* 一応上限ガード */
