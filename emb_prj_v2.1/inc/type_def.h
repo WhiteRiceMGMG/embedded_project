@@ -12,17 +12,19 @@
 
 #include <stdint.h>
 
-typedef struct 
-{ 
-    u1 bi0 : 1,
-    u1 bi1 : 1,
-    u1 bi2 : 1,
-    u1 bi3 : 1,
-    u1 bi4 : 1,
-    u1 bi5 : 1,
-    u1 bi6 : 1,
-    u1 bi7 : 1,
-} str_flg8;
+
+
+/* 符号付き整数 */
+typedef int8_t              s1;      /* 8 bit */
+typedef int16_t             s2;      /* 16 bit */
+typedef int32_t             s4;      /* 32 bit */
+typedef int64_t             s8;      /* 64 bit */
+
+/* 符号無し整数 */
+typedef uint8_t             u1;      /* 8 bit */
+typedef uint16_t            u2;      /* 16 bit */
+typedef uint32_t            u4;      /* 32 bit */
+typedef uint64_t            u8;      /* 64 bit */
 
 /* 符号付き整数 */
 typedef int8_t              B;      /* 8 bit */
@@ -54,7 +56,24 @@ typedef unsigned int        UINT;   /* 符号無し整数 */
 
 /* 特別な意味を持つ整数 */
 typedef INT                 ID;     /* ID番号 */
-typedef UW                  ATR;    /* 属性 */ /* 
+typedef UW                  ATR;    /* 属性 */  
+
+typedef struct 
+{ 
+    u1 bi0 : 1,
+    u1 bi1 : 1,
+    u1 bi2 : 1,
+    u1 bi3 : 1,
+    u1 bi4 : 1,
+    u1 bi5 : 1,
+    u1 bi6 : 1,
+    u1 bi7 : 1
+} str_flg8;
+
+/*********************************************************************************/
+/* インクルードガード                                                            */
+/*********************************************************************************/
+#endif 
 
 /*********************************************************************************/
 /* EOF                                                                           */

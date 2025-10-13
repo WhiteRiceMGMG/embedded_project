@@ -6,14 +6,14 @@
 /* hist : 2025 / 10 /03                                                          */
 /*********************************************************************************/
 
-#include "typedef.h"
-#include "sysdef.h"
-#include "syslib.h"
-#include "config.h"
-#include "error.h"
+#include "type_def.h"
+/* #include "sys_def.h"
+#include "sys_lib.h"
+#include "tsk_config.h"
+#include "....error.h"
 #include "knldef.h"
 #include "apidef.h"
-
+*/
 /*********************************************************************************/
 /* EOF                                                                           */
 /*********************************************************************************/
