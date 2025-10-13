@@ -12,8 +12,6 @@
 
 #include <stdint.h>
 
-
-
 /* 符号付き整数 */
 typedef int8_t              s1;      /* 8 bit */
 typedef int16_t             s2;      /* 16 bit */
@@ -60,14 +58,14 @@ typedef UW                  ATR;    /* 属性 */
 
 typedef struct 
 { 
-    u1 bi0 : 1,
-    u1 bi1 : 1,
-    u1 bi2 : 1,
-    u1 bi3 : 1,
-    u1 bi4 : 1,
-    u1 bi5 : 1,
-    u1 bi6 : 1,
-    u1 bi7 : 1
+    unsigned char bi0 : 1;
+    unsigned char bi1 : 1;
+    unsigned char bi2 : 1;
+    unsigned char bi3 : 1;
+    unsigned char bi4 : 1;
+    unsigned char bi5 : 1;
+    unsigned char bi6 : 1;
+    unsigned char bi7 : 1;
 } str_flg8;
 
 /*********************************************************************************/
