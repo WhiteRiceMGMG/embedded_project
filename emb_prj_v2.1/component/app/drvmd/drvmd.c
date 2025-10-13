@@ -37,13 +37,13 @@ enum
 /* 変数定義                                                                      */
 /*********************************************************************************/
 /* 現在のモードと押されたボタン(UP or DOWN)により次のモードに移行する． */
-static const u1 NEXT_DRVMD_TBL[NUMVER_OF_DRVMD][NUMBER_OF_DRVMDSW] =
+static const u1 NEXT_DRVMD_TBL[DRIVE_MODE_NUM][NUMBER_OF_DRVMDSW] =
 { /* DOWN が押されたとき  UPが押されたとき                              */
     {DRIVE_MODE_ECO,      DRIVE_MODE_NORMAL      },   /* 現在モード : ECO     */
     {DRIVE_MODE_ECO,      DRIVE_MODE_SPORT       },   /* 現在モード : NORMAL  */
     {DRIVE_MODE_NORMAL,   DRIVE_MODE_OVER_DRIVE  },   /* 現在モード : SPORT   */
-    {DRIVE_MODE_SPORT,    DRIVE_MODE_OVER_DRIVE. }    /* 現在モード : OVER_DRIVE(解放フルバースト) */
-}
+    {DRIVE_MODE_SPORT,    DRIVE_MODE_OVER_DRIVE  }    /* 現在モード : OVER_DRIVE(解放フルバースト) */
+};
 
 /*********************************************************************************/
 /* コンポーネント外部公開関数定義                                                */
