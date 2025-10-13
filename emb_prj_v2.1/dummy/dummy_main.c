@@ -32,8 +32,8 @@ void define_dummyfunc( void )
 
 void reference_interface( void )
 {
-    printf("%d",u1g_ogw_crtdrvm);
-    printf("%d",u1g_ogw_drvmdsw_status);
+    printf("u1g_ogw_crtdrvmd:%d\n",u1g_ogw_crtdrvmd);
+    printf("u1g_ogw_drvmdsw_status:%d\n",u1g_ogw_drvmdsw_status);
 }
 
 /*********************************************************************************/
