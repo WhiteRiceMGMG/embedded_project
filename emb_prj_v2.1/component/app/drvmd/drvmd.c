@@ -21,7 +21,7 @@
 #define DRVMDSWDW_IS_PUSHED   (u1)1     /* ドライブモードスイッチ DOWN 押下状態 */
 #define NUMBER_OF_DRVMDSW     (u1)2     /* スイッチの数                         */ 
 #define DRVMDSW_IS_NOT_PUSHED (u1)2     /* ドライブモードスイッチ 非押下状態    */
-#define DRVMDSW_IS_ERRORA     (u1)3     /* ドライブモードスイッチ エラー状態    */
+#define DRVMDSW_IS_ERROR      (u1)3     /* ドライブモードスイッチ エラー状態    */
 
 /*-------------------- drvmdif.h に記載のためコメントアウト ----------------------
 enum 
@@ -69,7 +69,7 @@ void vdg_ogw_get_drvmd( void )
         
     }
 
-    if(u1s_temp_drvmdsw_pushed == (u1)DDRVMDSW_IS_ERROR)
+    if(u1s_temp_drvmdsw_pushed == (u1)DRVMDSW_IS_ERROR)
     {
         u1g_ogw_crtdrvmd = u1s_temp_pastdrvmd; /* ボタン状態エラーなら遷移しない */
     } 
@@ -113,9 +113,9 @@ static u1 u1s_drvmdsw_conf( void )
     {
         u2s_temp_drvmdswdw_cnt = u2s_temp_drvmdswdw_cnt + 1;
         /* 一応上限ガード */
-        if(u2s_temp_drvmdswdw_cnt >= DRVMDSW_CNT_MAX)
+        if(u2s_temp_drvmdswdw_cnt >= DRVMDSW_CNT_TIME_MAX)
         {
-            u2s_temp_drvmdswdw_cnt = DRVMDSW_CNT_MAX;
+            u2s_temp_drvmdswdw_cnt = DRVMDSW_CNT_TIME_MAX;
         }
     }
     else
@@ -130,7 +130,7 @@ static u1 u1s_drvmdsw_conf( void )
     if((u2s_temp_drvmdswup_cnt >= (u2)DRVMDSW_PUSHED_TIME_DEFINE)
      &&(u2s_temp_drvmdswdw_cnt >= (u2)DRVMDSW_PUSHED_TIME_DEFINE))
     {
-        u1s_temp_drvmdsw_pushsts = (u1)DRVMDSW_IS_ERRORA;
+        u1s_temp_drvmdsw_pushsts = (u1)DRVMDSW_IS_ERROR;
     }
 
     /* UPカウントが押下定義時間を超えたらUP押下判定 */
@@ -147,9 +147,9 @@ static u1 u1s_drvmdsw_conf( void )
 
     /* UP or DWカウントが固着定義時間を超えたら固着判定 */
     if((u2s_temp_drvmdswup_cnt >= (u2)DRVMDSW_HOLD_TIME_DEFINE)
-     ||(u2s_temp_drvmdswsw_cnt >= (u2)DRVMDSW_HOLD_TIME_DEFINE))
+     ||(u2s_temp_drvmdswdw_cnt >= (u2)DRVMDSW_HOLD_TIME_DEFINE))
     {
-       u1s_temp_drvmdsw_pushsts = (u1)DRVMDSW_IS_ERRORA;
+       u1s_temp_drvmdsw_pushsts = (u1)DRVMDSW_IS_ERROR;
     }
 
     return u1s_temp_drvmdsw_pushsts;
