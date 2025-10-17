@@ -28,16 +28,16 @@
 /* マクロ定義                                                                    */
 /*********************************************************************************/
 /*---------------------------------▼▼▼(要設定)--------------------------------*/
-#define DRVMDSW_STATUS_SUCESS (u1)1
-#define DRVMDSW_STATUS_FAILED (u1)0
+#define DRVMDSW_STATUS_SUCESS (u1)1  /* ドライブモードスイッチ固着なし */
+#define DRVMDSW_STATUS_FAILED (u1)0  /* ドライブモードスイッチ固着あり */
 
 enum 
 {
-    DRIVE_MODE_ECO          = 0,      /* ドライブモード : ECO */
+    DRIVE_MODE_ECO          = 0,      /* ドライブモード : ECO    */
     DRIVE_MODE_NORMAL       = 1,      /* ドライブモード : NORMAL */
-    DRIVE_MODE_SPORT        = 2,      /* ドライブモード : SPORT */
+    DRIVE_MODE_SPORT        = 2,      /* ドライブモード : SPORT  */
     DRIVE_MODE_OVER_DRIVE   = 3,      /* ドライブモード : OVER_DRIVE(解放フルバースト) */
-    DRIVE_MODE_NUM                    /* ドライブモードの数 */
+    DRIVE_MODE_NUM                    /* ドライブモードの数      */
 };
 
 /*---------------------------------▲▲▲(要設定)--------------------------------*/
