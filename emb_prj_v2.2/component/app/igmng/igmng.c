@@ -68,6 +68,44 @@
 /* 戻り値 | u1型 スイッチステータス                                              */
 /* 作成   | 2025 / 10 /16                                                        */
 /*********************************************************************************/
+u1 u1s_igsw_conf( void )
+{
+    static u2 u2s_temp_igsw_cnt = 0;
+    u1 u1s_temp_igsw_pushsts    = (u1)IGNITIONSW_IS_NOT_PUSHED;
+
+    if(Ked.IgSw.Pushed())
+    {
+        u2s_temp_igsw_cnt = u2s_temp_igsw_cnt + 1;
+        /*一応上限ガード*/
+        if(u2s_temp_igsw_cnt >= (u2)IGSW_CNT_TIME_MAX)
+        {
+            u2s_tmep_igsw_cnt = (u2)IGSW_CNT_TIME_MAX;
+        }
+    }
+    else
+    {
+        if(u2s_temp_igsw_cnt > 0)
+        {
+            u2s_temp_igsw_cnt = u2s_temp_igsw_cnt - 1;
+        }
+    }
+
+    /* IGカウントが押下定義時間を超えたらIG押下判定 */
+    if(u2s_tmep_igsw_cnt >= (u2)IGSW_PUSHED_TIME_DEFINE)
+    {
+        u1s_temp_igsw_pushsts = (u1)IGNITIONSW_IS_PUSHED;
+    }
+
+    /* IGカウントが固着定義時間を超えたら固着判定 */
+    if(u2s_temp_igsw_cnt >= (u2)IGSW_HOLD_TIME_DEFINE)
+    {
+        u1s_temp_igsw_pushsts = (u1)IGNITIONSW_IS_ERROR; 
+    }
+    
+    return u1s_temp_igsw_pushsts;
+
+}
+
 
 /*********************************************************************************/
 /* EOF                                                                           */
