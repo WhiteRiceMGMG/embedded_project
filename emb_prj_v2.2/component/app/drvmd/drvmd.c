@@ -66,12 +66,13 @@ void vdg_ogw_get_drvmd( void )
     {
         /* スイッチ種類と現在のモードを代入すると移行先のモードが設定される */
         u1g_ogw_crtdrvmd = NEXT_DRVMD_TBL[u1s_temp_pastdrvmd][u1s_temp_drvmdsw_pushed];
-        
+        u1g_ogw_drvmdsw_status = DRVMDSW_STATUS_SUCESS; /* ボタン固着なし状態 */
     }
 
     if(u1s_temp_drvmdsw_pushed == (u1)DRVMDSW_IS_ERROR)
     {
         u1g_ogw_crtdrvmd = u1s_temp_pastdrvmd; /* ボタン状態エラーなら遷移しない */
+        u1g_ogw_drvmdsw_status = DRVMDSW_STATUS_FAILED; /* ボタン固着あり状態 */
     } 
 
 }
