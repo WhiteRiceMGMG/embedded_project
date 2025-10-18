@@ -42,7 +42,8 @@
     if((u1s_temp_igswst == IGNITIONSW_IS_PUSHED)
      &&(u1s_temp_igswmd == IGNITION_MODE_OFF))
     {
-        u1g_igmng_igmd= IGNITION_MODE_ON;
+        u1g_igmng_igmd    = IGNITION_MODE_ON;
+        u1g_igmng_igswsts = IGNITIONSW_STATUS_SUCCESS; 
     }
 
     /*  ボタン押下，かつ現在イグニッションオンなら遷移 */
@@ -50,11 +51,21 @@
      &&(u1s_temp_igswmd == IGNITION_MODE_ON))
     {
         u1g_igmng_igmd = IGNITION_MODE_OFF;
+        u1g_igmng_igswsts = IGNITIONSW_STATUS_SUCCESS; 
     }
-
+    
+     /* ボタン非状態なら遷移しない */
     if(u1s_temp_igswst == (u1)IGNITIONSW_IS_ERROR)
     {
-        u1g_igmng_igmd = u1s_temp_igswmd ; /* ボタン状態エラーなら遷移しない */
+        u1g_igmng_igmd    = u1s_temp_igswmd ;
+        u1g_igmng_igswsts = IGNITIONSW_STATUS_SUCCESS;
+    }     
+
+     /* ボタン状態エラーなら遷移しない */
+    if(u1s_temp_igswst == (u1)IGNITIONSW_IS_ERROR)
+    {
+        u1g_igmng_igmd    = u1s_temp_igswmd ;
+        u1g_igmng_igswsts = IGNITIONSW_STATUS_FAILED;
     } 
 
 
