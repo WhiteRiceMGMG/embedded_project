@@ -69,6 +69,13 @@ void vdg_ogw_get_drvmd( void )
         u1g_ogw_drvmdsw_status = DRVMDSW_STATUS_SUCESS; /* ボタン固着なし状態 */
     }
 
+    if(u1s_temp_drvmdsw_pushed == (u1)DRVMDSW_IS_NOT_PUSHED)
+    {
+        u1g_ogw_crtdrvmd = u1s_temp_pastdrvmd; /* ボタン非押下なら遷移しない */
+        u1g_ogw_drvmdsw_status = DRVMDSW_STATUS_SUCCESS; /* ボタン固着なし状態 */
+    }     
+
+
     if(u1s_temp_drvmdsw_pushed == (u1)DRVMDSW_IS_ERROR)
     {
         u1g_ogw_crtdrvmd = u1s_temp_pastdrvmd; /* ボタン状態エラーなら遷移しない */
