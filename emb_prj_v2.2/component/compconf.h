@@ -32,6 +32,11 @@
 #define DRVMDSW_HOLD_TIME_DEFINE   (u2)500  /* 固着時間定義 */
 #define DRVMDSW_PUSHED_TIME_DEFINE (u2)100  /* 押下時間定義 */
 #define DRVMDSW_CNT_TIME_MAX       (u2)1000 /* スイッチカウント上限定義 */
+
+/* cpmponent/app/igmngif.hで使用 */
+#define IGSW_CNT_TIME_MAX          (u2)500  /* 固着時間定義 */
+#define IGSW_HOLD_TIME_DEFINE      (u2)1000 /* 押下時間定義 */
+#define IGSW_PUSHED_TIME_DEFINE    (u2)100  /* ス一カウント上限定義 */
 /*---------------------------------▲▲▲(要設定)--------------------------------*/
 
 /*********************************************************************************/
