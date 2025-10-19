@@ -84,15 +84,15 @@
 u1 u1s_igsw_conf( void )
 {
     static u2 u2s_temp_igsw_cnt = 0;
-    u1 u1s_temp_igsw_pushsts    = (u1)IGNITIONSW_IS_NOT_PUSHED;
+    u1 u1s_temp_igsw_pushsts    = IGNITIONSW_IS_NOT_PUSHED;
 
     if(Ked.IgSw.Pushed())
     {
         u2s_temp_igsw_cnt = u2s_temp_igsw_cnt + 1;
         /*一応上限ガード*/
-        if(u2s_temp_igsw_cnt >= (u2)IGSW_CNT_TIME_MAX)
+        if(u2s_temp_igsw_cnt >= IGSW_CNT_TIME_MAX)
         {
-            u2s_tmep_igsw_cnt = (u2)IGSW_CNT_TIME_MAX;
+            u2s_tmep_igsw_cnt = IGSW_CNT_TIME_MAX;
         }
     }
     else
@@ -104,15 +104,15 @@ u1 u1s_igsw_conf( void )
     }
 
     /* IGカウントが押下定義時間を超えたらIG押下判定 */
-    if(u2s_tmep_igsw_cnt >= (u2)IGSW_PUSHED_TIME_DEFINE)
+    if(u2s_tmep_igsw_cnt >= IGSW_PUSHED_TIME_DEFINE)
     {
-        u1s_temp_igsw_pushsts = (u1)IGNITIONSW_IS_PUSHED;
+        u1s_temp_igsw_pushsts = IGNITIONSW_IS_PUSHED;
     }
 
     /* IGカウントが固着定義時間を超えたら固着判定 */
-    if(u2s_temp_igsw_cnt >= (u2)IGSW_HOLD_TIME_DEFINE)
+    if(u2s_temp_igsw_cnt >= IGSW_HOLD_TIME_DEFINE)
     {
-        u1s_temp_igsw_pushsts = (u1)IGNITIONSW_IS_ERROR; 
+        u1s_temp_igsw_pushsts = IGNITIONSW_IS_ERROR; 
     }
     
     return u1s_temp_igsw_pushsts;
