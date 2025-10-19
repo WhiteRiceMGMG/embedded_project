@@ -61,22 +61,22 @@ void vdg_ogw_get_drvmd( void )
 
     u1 u1s_temp_drvmdsw_pushed =  u1s_drvmdsw_conf();        /* ボタン押下を確認 */
 
-    if((u1s_temp_drvmdsw_pushed == (u1)DRVMDSWUP_IS_PUSHED)
-     ||(u1s_temp_drvmdsw_pushed == (u1)DRVMDSWDW_IS_PUSHED))
+    if((u1s_temp_drvmdsw_pushed == DRVMDSWUP_IS_PUSHED)
+     ||(u1s_temp_drvmdsw_pushed == DRVMDSWDW_IS_PUSHED))
     {
         /* スイッチ種類と現在のモードを代入すると移行先のモードが設定される */
         u1g_ogw_crtdrvmd = NEXT_DRVMD_TBL[u1s_temp_pastdrvmd][u1s_temp_drvmdsw_pushed];
         u1g_ogw_drvmdsw_status = DRVMDSW_STATUS_SUCESS; /* ボタン固着なし状態 */
     }
 
-    if(u1s_temp_drvmdsw_pushed == (u1)DRVMDSW_IS_NOT_PUSHED)
+    if(u1s_temp_drvmdsw_pushed == DRVMDSW_IS_NOT_PUSHED)
     {
         u1g_ogw_crtdrvmd = u1s_temp_pastdrvmd; /* ボタン非押下なら遷移しない */
         u1g_ogw_drvmdsw_status = DRVMDSW_STATUS_SUCCESS; /* ボタン固着なし状態 */
     }     
 
 
-    if(u1s_temp_drvmdsw_pushed == (u1)DRVMDSW_IS_ERROR)
+    if(u1s_temp_drvmdsw_pushed == DRVMDSW_IS_ERROR)
     {
         u1g_ogw_crtdrvmd = u1s_temp_pastdrvmd; /* ボタン状態エラーなら遷移しない */
         u1g_ogw_drvmdsw_status = DRVMDSW_STATUS_FAILED; /* ボタン固着あり状態 */
@@ -98,15 +98,15 @@ static u1 u1s_drvmdsw_conf( void )
 {
     static u2 u2s_temp_drvmdswup_cnt = 0;
     static u2 u2s_temp_drvmdswdw_cnt = 0;
-    u1 u1s_temp_drvmdsw_pushsts = (u1)DRVMDSW_IS_NOT_PUSHED;
+    u1 u1s_temp_drvmdsw_pushsts = DRVMDSW_IS_NOT_PUSHED;
 
     if(Ked.DrvmdSwUp.Pushed())
     {
         u2s_temp_drvmdswup_cnt = u2s_temp_drvmdswup_cnt + 1;
         /* 一応上限ガード */
-        if(u2s_temp_drvmdswup_cnt >= (u2)DRVMDSW_CNT_TIME_MAX)
+        if(u2s_temp_drvmdswup_cnt >= DRVMDSW_CNT_TIME_MAX)
         {
-            u2s_temp_drvmdswup_cnt = (u2)DRVMDSW_CNT_TIME_MAX;
+            u2s_temp_drvmdswup_cnt = DRVMDSW_CNT_TIME_MAX;
         }
     }
     else
@@ -135,29 +135,29 @@ static u1 u1s_drvmdsw_conf( void )
     }
 
     /* 同時押しは固着モード判定にする． */
-    if((u2s_temp_drvmdswup_cnt >= (u2)DRVMDSW_PUSHED_TIME_DEFINE)
-     &&(u2s_temp_drvmdswdw_cnt >= (u2)DRVMDSW_PUSHED_TIME_DEFINE))
+    if((u2s_temp_drvmdswup_cnt >= DRVMDSW_PUSHED_TIME_DEFINE)
+     &&(u2s_temp_drvmdswdw_cnt >= DRVMDSW_PUSHED_TIME_DEFINE))
     {
-        u1s_temp_drvmdsw_pushsts = (u1)DRVMDSW_IS_ERROR;
+        u1s_temp_drvmdsw_pushsts = DRVMDSW_IS_ERROR;
     }
 
     /* UPカウントが押下定義時間を超えたらUP押下判定 */
-    if(u2s_temp_drvmdswup_cnt >= (u2)DRVMDSW_PUSHED_TIME_DEFINE)
+    if(u2s_temp_drvmdswup_cnt >= DRVMDSW_PUSHED_TIME_DEFINE)
     {
-        u1s_temp_drvmdsw_pushsts = (u1)DRVMDSWUP_IS_PUSHED;
+        u1s_temp_drvmdsw_pushsts = DRVMDSWUP_IS_PUSHED;
     }
 
     /* DWカウントが押下定義時間を超えたDWP押下判定 */
-    if(u2s_temp_drvmdswdw_cnt >= (u2)DRVMDSW_PUSHED_TIME_DEFINE)
+    if(u2s_temp_drvmdswdw_cnt >= DRVMDSW_PUSHED_TIME_DEFINE)
     {
-        u1s_temp_drvmdsw_pushsts = (u1)DRVMDSWDW_IS_PUSHED;
+        u1s_temp_drvmdsw_pushsts = DRVMDSWDW_IS_PUSHED;
     }
 
     /* UP or DWカウントが固着定義時間を超えたら固着判定 */
-    if((u2s_temp_drvmdswup_cnt >= (u2)DRVMDSW_HOLD_TIME_DEFINE)
-     ||(u2s_temp_drvmdswdw_cnt >= (u2)DRVMDSW_HOLD_TIME_DEFINE))
+    if((u2s_temp_drvmdswup_cnt >= DRVMDSW_HOLD_TIME_DEFINE)
+     ||(u2s_temp_drvmdswdw_cnt >= DRVMDSW_HOLD_TIME_DEFINE))
     {
-       u1s_temp_drvmdsw_pushsts = (u1)DRVMDSW_IS_ERROR;
+       u1s_temp_drvmdsw_pushsts = DRVMDSW_IS_ERROR;
     }
 
     return u1s_temp_drvmdsw_pushsts;
