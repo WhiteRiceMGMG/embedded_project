@@ -3,7 +3,8 @@
 /*********************************************************************************/
 /* file : igmnh .c                                                               */
 /* abst : ドライブモード調停                                                     */
-/* hist : 2025 / 10 /16                                                          */
+/* hist : 2025 / 10 /16                                                          *
+/
 /*********************************************************************************/
 
 /*********************************************************************************/
@@ -55,14 +56,14 @@
     }
     
      /* ボタン非状態なら遷移しない */
-    if(u1s_temp_igswst == (u1)IGNITIONSW_IS_ERROR)
+    if(u1s_temp_igswst == IGNITIONSW_IS_ERROR)
     {
         u1g_igmng_igmd    = u1s_temp_igswmd ;
         u1g_igmng_igswsts = IGNITIONSW_STATUS_SUCCESS;
     }     
 
      /* ボタン状態エラーなら遷移しない */
-    if(u1s_temp_igswst == (u1)IGNITIONSW_IS_ERROR)
+    if(u1s_temp_igswst == IGNITIONSW_IS_ERROR)
     {
         u1g_igmng_igmd    = u1s_temp_igswmd ;
         u1g_igmng_igswsts = IGNITIONSW_STATUS_FAILED;
