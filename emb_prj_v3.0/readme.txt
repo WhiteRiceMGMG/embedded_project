@@ -7,7 +7,7 @@ VERSION2.2 : RTOS適用 ボタン検出タスク+LEDイベント2つ
 VERSION3.0 : OS・Application分離
 
 .
-└── emb_prj_v2.0
+└── emb_prj_v3.0
     ├── application  （Application Layer）
     ├── common
     │   └── main.c
