@@ -68,7 +68,7 @@ VERSION3.0 : OS・Application分離
 tkinterでボタンとか作るバージョンも作りたい
 tkinterでGUIボタン配置→Cソース読み込み？
 作成開始uuuuummmmmm
-
+hoo
 
 ▼▼▼以下フォルダ構成素材▼▼▼
 # emb_prj_v2.0
