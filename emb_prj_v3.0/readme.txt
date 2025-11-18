@@ -6,6 +6,8 @@ VERSION2.1 : 簡易テスト用ダミー関数追加
 VERSION2.2 : RTOS適用 ボタン検出タスク+LEDイベント2つ
 VERSION3.0 : OS・Application分離
 
+今後の案について
+uuu,.ベアメタルでRTOS搭載のrasp作成．
 .
 └── emb_prj_v3.0
     ├── application  （Application Layer）
