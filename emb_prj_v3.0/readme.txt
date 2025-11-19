@@ -8,6 +8,7 @@ VERSION3.0 : OS・Application分離
 
 今後の案について
 uuu,.ベアメタルでRTOS搭載のrasp作成．
+wrasp
 .
 └── emb_prj_v3.0
     ├── application  （Application Layer）
