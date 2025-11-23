@@ -7,9 +7,10 @@ VERSION2.2 : RTOS適用 ボタン検出タスク+LEDイベント2つ
 VERSION3.0 : OS・Application分離
 
 今後の案について
-uuu,.ベアメタルでRTOS搭載のrasp作成．
-wrasp
-.adfka;sdlkafjigliygyulguoyg
+ボタン２つ，LED２つ
+モード切替 アクセル，ブレーキ
+
+
 └── emb_prj_v3.0
     ├── application  （Application Layer）
     ├── common
