@@ -5,6 +5,7 @@ VERSION2.0 : KED_MODEカプセル追加
 VERSION2.1 : 簡易テスト用ダミー関数追加
 VERSION2.2 : RTOS適用 ボタン検出タスク+LEDイベント2つ
 VERSION3.0 : OS・Application分離
+ブレッドボード購入
 
 今後の案について
 ボタン２つ，LED２つ
