@@ -13,7 +13,7 @@ VERSION3.0 : OS・Application分離
 I2C通信も使って文字列送信もやりたい ho....
 interface社読む
 read read read
-
+ !!
 
 
 └── emb_prj_v3.0
