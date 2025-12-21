@@ -33,11 +33,36 @@ FLGCB flgvb_tbl[CNF_MAX_FLAGID];
 /********************************************************/
 /* 関数   | ID tk_cre_flg( const T_CFLG *pk_cflg )      */
 /* 説明   | イベントフラグ生成API                       */
-/*        | なし                                        */
 /* 引数   | なし                                        */
 /* 戻り値 | なし                                        */
 /********************************************************/
+ID tk_cre_flg( const T_CFLG *pk_cflg )
+{
+    ID   flgid;
+    UINT intsts;
 
+    DI(intsts);
+
+    for(flgid = 0; flgcb_tbl[flgid].state != KS_NONEXIST; flgid++)
+    {
+        ;
+    }
+
+    if(flgid < CNF_MAX_FLGID)
+    {
+        flgcb_tbl[flgid].state = KS_EXIST;
+        flgcb_tbl[flgid].flgptn = pl_cflg -> iflgptn;
+        flgid++;
+    }
+    else
+    {
+        flgid = E_LIMIT;
+    }
+
+    EI(intsts);
+
+    return flgid;
+}
 
 /********************************************************/
 /* 関数   | u1 u1g_sample_function( void )              */
