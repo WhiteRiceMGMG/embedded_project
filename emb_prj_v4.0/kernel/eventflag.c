@@ -33,8 +33,8 @@ FLGCB flgvb_tbl[CNF_MAX_FLAGID];
 /********************************************************/
 /* 関数   | ID tk_cre_flg( const T_CFLG *pk_cflg )      */
 /* 説明   | イベントフラグ生成API                       */
-/* 引数   | なし                                        */
-/* 戻り値 | なし                                        */
+/* 引数   | T_CFLG *pk_cflg                             */
+/* 戻り値 | flgid                                       */
 /********************************************************/
 ID tk_cre_flg( const T_CFLG *pk_cflg )
 {
@@ -65,13 +65,24 @@ ID tk_cre_flg( const T_CFLG *pk_cflg )
 }
 
 /********************************************************/
-/* 関数   | u1 u1g_sample_function( void )              */
-/* 説明   | ドライブモード取得関数宣言                  */
-/*        | 初期化関数を実行しておくこと                */
-/* 引数   | なし                                        */
+/* 関数   | static BOOL check_flag( UINT flgptn,        */
+/*        |  UINT waiptn, UINT wfmode )                 */
+/* 説明   | イベントフラグ待ちの条件チェック            */
+/* 引数   | UINT flgptn, UINT waiptn, UINT wfmode       */
 /* 戻り値 | なし                                        */
 /********************************************************/
-
+static BOOL check_clag( UINT flgptn, UINT waiptn, UINT wfmode )
+{
+    BOOL u1t_eventflag_waiptn;
+    if(wfmode & TWF_ORW)
+    {
+        u1t_eventflag_waiptn = ((flgptn & waiptn) != 0);
+    }
+    else
+    {
+        u1t_eventflag_waiptn = ((flgptn & waiptn) == waiptn);
+    }
+}
 
 /********************************************************/
 /* 関数   | u1 u1g_sample_function( void )              */
