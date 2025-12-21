@@ -69,7 +69,7 @@ ID tk_cre_flg( const T_CFLG *pk_cflg )
 /*        |  UINT waiptn, UINT wfmode )                 */
 /* 説明   | イベントフラグ待ちの条件チェック            */
 /* 引数   | UINT flgptn, UINT waiptn, UINT wfmode       */
-/* 戻り値 | なし                                        */
+/* 戻り値 | BOOL u1t_eventflag_waiptn                   */
 /********************************************************/
 static BOOL check_clag( UINT flgptn, UINT waiptn, UINT wfmode )
 {
@@ -82,15 +82,19 @@ static BOOL check_clag( UINT flgptn, UINT waiptn, UINT wfmode )
     {
         u1t_eventflag_waiptn = ((flgptn & waiptn) == waiptn);
     }
+
+    return u1t_eventflag_waiptn;
 }
 
 /********************************************************/
-/* 関数   | u1 u1g_sample_function( void )              */
-/* 説明   | ドライブモード取得関数宣言                  */
-/*        | 初期化関数を実行しておくこと                */
-/* 引数   | なし                                        */
+/* 関数   | ER tk_set_flg( ID flgid, UINT setptn )      */
+/* 説明   | イベントフラグのセットAPI                   */
+/* 引数   | ID flgid, UINT setptn                       */
 /* 戻り値 | なし                                        */
 /********************************************************/
+
+
+
 
 /********************************************************/
 /* 関数   | u1 u1g_sample_function( void )              */
