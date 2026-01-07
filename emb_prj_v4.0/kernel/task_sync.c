@@ -32,10 +32,10 @@ ER tk_dly_tsk( RELTIM dlytim )
         tqueue_remove_top
         (&ready_queue[cur_task->itskpri]); 
 
-        cur_task->state   = TS_WAIT;                
-        cur_task->waifct  = TWFCT_DLY;              
-        cur_task->waitim  = dlytim + TIMER_PERIOD;  
-        cur_task->waierr = &err;                   
+        cur_task -> state   = TS_WAIT;                
+        cur_task -> waifct  = TWFCT_DLY;              
+        cur_task -> waitim  = dlytim + TIMER_PERIOD;  
+        cur_task -> waierr  = &err;                   
 
         tqueue_add_entry(&wait_queue, cur_task);   
         scheduler();                               
@@ -56,19 +56,19 @@ ER tk_slp_tsk( TMO tmout )
     ER      err = E_OK;
 
     DI(intsts);     
-    if ( cur_task->wupcnt > 0 ) 
+    if ( cur_task -> wupcnt > 0 ) 
     {
-        cur_task->wupcnt--;
+        cur_task -> wupcnt--;
 	  }
     else
     {
         tqueue_remove_top
         (&ready_queue[cur_task->itskpri]);
 
-        cur_task->state   = TS_WAIT;                
-        cur_task->waifct  = TWFCT_SLP;              
-        cur_task->waitim  = (tmout==TMO_FEVR)?tmout:(tmout+TIMER_PERIOD); 
-        cur_task->waierr = &err;
+        cur_task -> state   = TS_WAIT;                
+        cur_task -> waifct  = TWFCT_SLP;              
+        cur_task -> waitim  = (tmout==TMO_FEVR)?tmout:(tmout+TIMER_PERIOD); 
+        cur_task -> waierr = &err;
 
         tqueue_add_entry(&wait_queue, cur_task);
         scheduler();
