@@ -24,7 +24,7 @@
 /********************************************************/
 /* 内部公開変数                                         */
 /********************************************************/
-FLGCB flgvb_tbl[CNF_MAX_FLAGID];
+FLGCB flgcb_tbl[CNF_MAX_FLGID];
 
 /********************************************************/
 /* 外部公開関数定義                                     */
@@ -52,7 +52,7 @@ ID tk_cre_flg( const T_CFLG *pk_cflg )
     if(flgid < CNF_MAX_FLGID)
     {
         flgcb_tbl[flgid].state = KS_EXIST;
-        flgcb_tbl[flgid].flgptn = pl_cflg -> iflgptn;
+        flgcb_tbl[flgid].flgptn = pk_cflg -> iflgptn;
         flgid++;
     }
     else
@@ -72,7 +72,7 @@ ID tk_cre_flg( const T_CFLG *pk_cflg )
 /* 引数   | UINT flgptn, UINT waiptn, UINT wfmode       */
 /* 戻り値 | BOOL u1t_eventflag_waiptn                   */
 /********************************************************/
-static BOOL check_clag( UINT flgptn, UINT waiptn,
+static BOOL check_flag( UINT flgptn, UINT waiptn,
                         UINT wfmode )
 {
     BOOL u1t_eventflag_waiptn;
@@ -126,9 +126,9 @@ ER tk_set_flg( ID flgid, UINT setptn )
                 {
                     tqueue_remove_entry(&wait_queue, tcb);
                     tcb  -> state    = TS_READY;
-                    tcb  -> waifct   = TWFCT_NOW;
+                    tcb  -> waifct   = TWCFT_NOW;
                     *tcb -> p_flgptn = flgcb -> flgptn;
-                    tqueue_add_enrty(&ready_queue[tcb -> itskpri], tcb);
+                    tqueue_add_entry(&ready_queue[tcb -> itskpri], tcb);
                     scheduler();
 
                     if((tcb -> wfmode & TWF_BITCLR) != 0)
@@ -163,7 +163,7 @@ ER tk_set_flg( ID flgid, UINT setptn )
 /* 引数   | ID flgid, UINT clrptn                       */
 /* 戻り値 | なし                                        */
 /********************************************************/
-ER tk_clr_ptn( ID flgid, UINT clrptn )
+ER tk_clr_flg( ID flgid, UINT clrptn )
 {
     FLGCB  *flgcb;
     ER     err = E_OK;
@@ -174,7 +174,7 @@ ER tk_clr_ptn( ID flgid, UINT clrptn )
     {
         return E_ID;
     }
-    DI(intsit);
+    DI(intsts);
     flgcb = &flgcb_tbl[--flgid];
     if(flgcb -> state == KS_EXIST)
     {
@@ -210,11 +210,11 @@ ER tk_wai_flg( ID flgid, UINT waiptn, UINT wfmode,
 
     DI(intsit);
     flgcb = &flgcb_tbl[--flgid];
-    if(flgid -> state == KS_EXIST)
+    if(flgcb -> state == KS_EXIST)
     {
-        if(check_flg(flgcb -> flgptn, waiptn, wfmode))
+        if(check_flag(flgcb -> flgptn, waiptn, wfmode))
         {
-            *p_flgptn = flgcb -> flgcb -> flgptn;
+            *p_flgptn = flgcb -> flgptn;
             if((wfmode & TWF_BITCLR) != 0)
             {
                 flgcb -> flgptn &= ~waiptn;
@@ -231,17 +231,17 @@ ER tk_wai_flg( ID flgid, UINT waiptn, UINT wfmode,
         else
         {
             tqueue_remove_top(
-                        &ready_queue[cur_task -> itspri]);
+                        &ready_queue[cur_task -> itskpri]);
 
             cur_task -> state  = TS_WAIT;
             cur_task -> waifct = TWFCT_FLG;
-            cur_task -> waipbj = flgid;
+            cur_task -> waiobj = flgid;
             cur_task -> waitim = ((tmout == TMO_FEVR)
-                            ? tmout: tmout + TIMER_PRIOD);
-            cur_task -> waiptn = waiptn;
-            cur_task -> wfmode = wfmode;
+                            ? tmout: tmout + TIMER_PERIOD);
+            cur_task -> waiptn   = waiptn;
+            cur_task -> wfmode   = wfmode;
             cur_task -> p_flgptn = p_flgptn;
-            cur_task -> &err;
+            cur_task -> waierr   = &err;
 
             tqueue_add_entry(&wait_queue, cur_task);
             scheduler();

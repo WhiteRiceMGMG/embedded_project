@@ -15,7 +15,7 @@
 /********************************************************/
 /* 外部公開定義                                         */
 /********************************************************/
-void inittsk( INT stacd, void *exinf);
+void initsk( INT stacd, void *exinf);
 u4 tskstk_ini[256 / sizeof(u4)];
 ID tskid_ini;
 
@@ -26,7 +26,7 @@ T_CTSK ctsk_ini =
     .itskpri    = 1,
     .stksz      = sizeof(tskstk_ini),
     .bufptr     = tskstk_ini
-}
+};
 
 /********************************************************/
 /* 外部公開関数定義                                     */
