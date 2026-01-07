@@ -21,7 +21,7 @@
 /* 引数   | TCB **queue, TCB *tcb                       */
 /* 戻り値 | semid                                       */
 /********************************************************/
-void tqueue_add_enrty( TCB **queue, TCB *tcb )
+void tqueue_add_entry( TCB **queue, TCB *tcb )
 {
     TCB *queue_end;
     if(*queue == NULL)
@@ -67,7 +67,7 @@ void tqueue_remove_top( TCB **queue )
 /* 引数   | TCB **queue, TCB *tcb                       */
 /* 戻り値 | なし                                        */
 /********************************************************/
-void tqueue_remove_enrty( TCB **queue, TCB *tcb )
+void tqueue_remove_entry( TCB **queue, TCB *tcb )
 {
     if(*queue == tcb)
     {

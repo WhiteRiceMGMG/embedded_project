@@ -36,7 +36,7 @@ TCB tcb_tbl[CNF_MAX_TSKID];
 /* 引数   | T_CTSK *pk_ctsk                             */
 /* 戻り値 | tskid                                       */
 /********************************************************/
-ID tk_cre_tsk( cosnt T_CTSK *pk_ctsk )
+ID tk_cre_tsk( const T_CTSK *pk_ctsk )
 {
     UINT intsts;
     ID   tskid;
@@ -46,7 +46,7 @@ ID tk_cre_tsk( cosnt T_CTSK *pk_ctsk )
     {
         return E_RSATR;
     }
-    if(pk_ctsk -> itskpri <= 0 || pk_ctsk -> itspri > CNF_MAX_TSKPRI)
+    if(pk_ctsk -> itskpri <= 0 || pk_ctsk -> itskpri > CNF_MAX_TSKPRI)
     {
         return E_PAR;
     }
@@ -79,7 +79,7 @@ ID tk_cre_tsk( cosnt T_CTSK *pk_ctsk )
     {
         tskid = (ID)E_LIMIT;
     }
-    EI(intsis);
+    EI(intsts);
     return tskid;
 }
 
@@ -99,14 +99,14 @@ ER tk_sta_tsk( ID tskid, INT stacd )
     {
         return E_ID;
     }
-    DI(intsis);
+    DI(intsts);
 
     tcb = &tcb_tbl[tskid - 1];
     if(tcb -> state == TS_DORMANT)
     {
         tcb -> state = TS_READY;
         tcb -> context = make_context(tcb -> stkadr, tcb -> stksz, tcb -> tskadr);
-        tqueue_add_enrty(&ready_queue[tcb -> itskpri], tcb);
+        tqueue_add_entry(&ready_queue[tcb -> itskpri], tcb);
         scheduler();
     }
     else
@@ -116,6 +116,26 @@ ER tk_sta_tsk( ID tskid, INT stacd )
 
     EI(intsts);
     return err;
+}
+
+
+/********************************************************/
+/* 関数   | void tk_ext_tsk( void )                     */
+/* 説明   | タスクの動作終了API                         */
+/* 引数   | なし                                        */
+/* 戻り値 | なし                                        */
+/********************************************************/
+void tk_ext_tsk( void )
+{
+    UINT	intsts;
+
+    DI(intsts); 
+
+    cur_task->state	= TS_DORMANT; 
+    tqueue_remove_top(&ready_queue[cur_task->itskpri]);
+
+    scheduler(); 
+    EI(intsts);
 }
 
 /********************************************************/
