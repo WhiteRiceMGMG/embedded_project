@@ -79,7 +79,7 @@ static void clock_config(UINT clock_kind, UW auxsrc, UW src_freq, UW freq)
 
     clock = CLOCKS_BASE + (clock_kind * 0xC);
 
-    div = (u4)(((UD)src_freq << 8) / freq);
+    div = (u4)(((u8)src_freq << 8) / freq);
     if (div > in_w(clock+CLK_x_DIV)) out_w(clock+CLK_x_DIV, div);
     clr_w(clock+CLK_x_CTRL, CLK_CTRL_ENABLE);
 
